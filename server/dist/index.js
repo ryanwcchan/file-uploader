@@ -1,17 +1,8 @@
 "use strict";
-// const express = require("express");
-// const port = process.env.PORT || 3000;
-// const app = express();
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// app.get("/", (req, res) => {
-//   res.send("Hello World!");
-// });
-// app.listen(port, () => {
-//   console.log(`Server is running on port http://localhost:${port}`);
-// });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
