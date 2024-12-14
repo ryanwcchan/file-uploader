@@ -23,7 +23,7 @@ export default function Login() {
               Password:
             </label>
             <input
-              type="text"
+              type="password"
               name="password"
               id="password"
               className="border rounded-md p-2 focus:outline-none"
