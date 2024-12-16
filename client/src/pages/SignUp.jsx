@@ -55,7 +55,7 @@ export default function SignUp() {
         {!success && (
           <>
             <h1 className="text-2xl font-bold">Sign Up</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} action="POST">
               <div className="flex flex-col my-2">
                 <label htmlFor="username" className="font-semibold">
                   Username:

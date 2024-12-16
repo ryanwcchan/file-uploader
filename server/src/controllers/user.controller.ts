@@ -1,4 +1,4 @@
-import { createUserService, getAllUsersService } from "../services/user.services";
+import { createUserService, getAllUsersService, loginUserService } from "../services/user.services";
 import { Request, Response } from "express";
 
 interface CreateUserBody {
@@ -28,12 +28,36 @@ async function createUserController(req: Request<{}, {}, CreateUserBody>, res: R
 async function getAllUsersController(req: Request, res: Response): Promise<void> {
     try {
         const users = await getAllUsersService()
-
         res.status(200).json(users)
+    } catch(error) {
+        console.log(error)
+        res.status(500).json({ message: 'Fetch users error' })
+    }
+}
+
+async function loginUserController(req: Request, res: Response): Promise<void> {
+    try {
+        const { username, password } = req.body
+
+        if(!username || !password) {
+            res.status(400).json({ message: 'Username and password are required' })
+            return
+        }
+
+        const user = await loginUserService(username, password)
+
+        if(!user) {
+            res.status(401).json({ message: 'Invalid credentials' })
+            return
+        }
+
+        console.log(user)
+
+        res.status(200).json(user)
     } catch(error) {
         console.log(error)
         res.status(500).json({ message: 'Internal server error' })
     }
 }
 
-export { createUserController, getAllUsersController }
+export { createUserController, getAllUsersController, loginUserController }

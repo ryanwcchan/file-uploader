@@ -1,6 +1,6 @@
 import prisma from "../../prisma/client";
 import bcrypt from 'bcryptjs'
-import { createUser, getAllUsers } from "../queries/user.queries";
+import { createUser, getAllUsers, getByUsername } from "../queries/user.queries";
 
 async function createUserService(username: string, password: string, confirmPassword: string) {
     // Check if user exists
@@ -27,4 +27,20 @@ async function getAllUsersService() {
     return await getAllUsers()
 }
 
-export { createUserService, getAllUsersService }
+async function loginUserService(username: string, password: string) {
+    const user = await getByUsername(username)
+
+    if (!user) {
+        throw new Error('User not found')
+    }
+
+    const validPassword = await bcrypt.compare(password, user.password)
+
+    if(!validPassword) {
+        throw new Error('Invalid password')
+    }
+
+    return user
+}
+
+export { createUserService, getAllUsersService, loginUserService }

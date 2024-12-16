@@ -20,7 +20,7 @@ model User {
 }
 
 model Session {
-  id      String   @id
+  id      Int      @id
   sid     String   @unique
   userId  String
   expires DateTime
